@@ -112,7 +112,7 @@
 
 % #1 name, #2 one-line description, #3 dates, #4 role and stack, #5 repository (no https://) or empty, #6 status or empty
 \newcommand{\cvproject}[6]{%
-\needspace{7\baselineskip}%
+\needspace{6\baselineskip}%
 {\rightskip=0pt\relax\noindent\textbf{\color{ink}#1} \textcolor{slate}{-- #2}\hfill{\footnotesize\color{slate}#3}\par}%
 {\small\itshape\color{slate}#4}\par
 \ifx\relax#5#6\relax\else
