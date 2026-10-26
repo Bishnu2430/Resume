@@ -7,8 +7,8 @@
 {2026}
 \begin{itemize}
 \item Full-stack app that reads a photo or PDF of a blood-test report and explains it in three languages on a 3D body map.
-\item Extraction pipeline (text layer, RapidOCR with deskew, layout-agnostic parser, LOINC mapping over 108 tests): 100\% field accuracy on 2,228 digital rows; 94.6\% recall at 100\% precision on simulated phone photos.
-\item Grounded LLM explanations (RAG over NLM MedlinePlus) pass a deterministic validator and an LLM judge, else fall back to a template; a 77-case red-team suite runs in CI.
+\item Extraction pipeline (text layer, RapidOCR with deskew, layout-agnostic parser, LOINC mapping over 108 tests): 100\% field accuracy on digital PDFs, 95.5\%+ on simulated phone photos; 99.7\% of rows mapped to the right test.
+\item Grounded LLM explanations (RAG over NLM MedlinePlus) pass a deterministic validator and an LLM judge, else fall back to a template; all 139 red-team cases pass in CI.
 \item Trend engine (Theil--Sen, Mann--Kendall, RCV) confirms 88\% of planted drifts at five visits, at 1.0\% false alarms.
 \end{itemize}
 

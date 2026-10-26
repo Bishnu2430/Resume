@@ -9,10 +9,10 @@
 {Complete}
 \begin{itemize}
 \item Reads a photo or PDF of a blood-test report, has the user confirm every value, then explains the results in plain English, Hindi or Odia, maps them onto an interactive 3D body and tracks them across years. Built to help people prepare for their doctor; it does not diagnose.
-\item Extraction: the PDF text layer first, else RapidOCR (ONNX, CPU) after projection-profile deskew, then a layout-agnostic row parser, LOINC matching over a 108-test catalogue, unit normalisation and a trained row-confidence model that sends weak rows to review first. 100\% field accuracy on 2,228 rows from digital PDFs; 94.6\% row recall at 100\% precision on simulated phone photos.
+\item Extraction: the PDF text layer first, else RapidOCR (ONNX, CPU) after projection-profile deskew, then a layout-agnostic row parser, LOINC matching over a 108-test catalogue, unit normalisation and a trained row-confidence model that sends weak rows to review first. 100\% field accuracy on digital PDFs, 95.5--99.6\% per field on simulated phone photos, 99.7\% of rows mapped to the right test, and all 87 results of a real 14-page report read and matched.
 \item Analysis: lab-range classification, fixed critical-value alerts, reference change values, Theil--Sen trends with an exact Mann--Kendall test, and NHANES population percentiles. On 50 synthetic histories it confirms 88\% of planted drifts at five visits with 1.0\% false alarms.
-\item Explanations: gpt-oss-120b writes to a strict JSON schema from retrieved NLM MedlinePlus passages in pgvector; a deterministic validator (script, numbers, citations, banned intents in three languages), then an LLM judge, then a template fallback. No generated text appears near a critical value; 77 red-team cases run in CI.
-\item Platform: API and worker queue, 22-table schema with Alembic, accounts with two-step sign-in for staff, doctor sharing by QR link, data export and deletion, an OWASP ASVS 5.0 Level 1 self-assessment, 13 architecture decision records, and CI for backend, frontend and diagrams.
+\item Explanations: gpt-oss-120b writes to a strict JSON schema from retrieved NLM MedlinePlus passages in pgvector; a deterministic validator (script, numbers, citations, banned intents in three languages), then an LLM judge, then a template fallback. No generated text appears near a critical value; all 139 red-team cases pass.
+\item Platform: API and worker queue, 33-table schema with Alembic, 642 automated tests, accounts with two-step sign-in for staff, doctor sharing by QR link, data export and deletion, an OWASP ASVS 5.0 Level 1 self-assessment, 13 architecture decision records, and CI for backend, frontend and diagrams.
 \end{itemize}
 
 \cvgap
