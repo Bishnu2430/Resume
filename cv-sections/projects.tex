@@ -1,53 +1,131 @@
-\cvsection{Selected Projects}
+\cvsection{Projects}
 
-\cventry
-{Q-CONSENSUS -- Multi-Agent LLM Reasoning with Verifiable Decision Trails}
-{Solo. Python, FastAPI, Qiskit Aer, llama.cpp, Solidity, Docker}
-{2026 - present}
+\cvproject
+{Nabz}
+{Lab Reports Explained}
+{Aug -- Oct 2026}
+{Python, FastAPI, PostgreSQL 17, pgvector, RapidOCR, Groq, React, TypeScript, Three.js, Docker}
+{github.com/Bishnu2430/Nabz}
+{Complete}
 \begin{itemize}
-\item Five agents debate on a local LLM; a QAOA solver over quantum-kernel similarity picks the consensus answer, benchmarked against a classical baseline.
-\item SHA-256 hash-chained events anchored on a private Ethereum chain, so any run can be replayed and verified.
+\item Reads a photo or PDF of a blood-test report, has the user confirm every value, then explains the results in plain English, Hindi or Odia, maps them onto an interactive 3D body and tracks them across years. Built to help people prepare for their doctor; it does not diagnose.
+\item Extraction: the PDF text layer first, else RapidOCR (ONNX, CPU) after projection-profile deskew, then a layout-agnostic row parser, LOINC matching over a 108-test catalogue, unit normalisation and a trained row-confidence model that sends weak rows to review first. 100\% field accuracy on 2,228 rows from digital PDFs; 94.6\% row recall at 100\% precision on simulated phone photos.
+\item Analysis: lab-range classification, fixed critical-value alerts, reference change values, Theil--Sen trends with an exact Mann--Kendall test, and NHANES population percentiles. On 50 synthetic histories it confirms 88\% of planted drifts at five visits with 1.0\% false alarms.
+\item Explanations: gpt-oss-120b writes to a strict JSON schema from retrieved NLM MedlinePlus passages in pgvector; a deterministic validator (script, numbers, citations, banned intents in three languages), then an LLM judge, then a template fallback. No generated text appears near a critical value; 77 red-team cases run in CI.
+\item Platform: API and worker queue, 22-table schema with Alembic, accounts with two-step sign-in for staff, doctor sharing by QR link, data export and deletion, an OWASP ASVS 5.0 Level 1 self-assessment, 13 architecture decision records, and CI for backend, frontend and diagrams.
 \end{itemize}
 
-\vspace{4pt}
+\cvgap
 
-\cventry
-{Misinformation Vaccine -- Fake News Detection}
-{Solo. Python, PyTorch, Transformers, FastAPI, PostgreSQL}
+\cvproject
+{Worldline}
+{Relativistic Universe Sandbox}
+{Oct 2026 -- present}
+{Rust, wgpu, egui; data from NASA JPL and NAIF}
+{github.com/Bishnu2430/Worldline}
+{In progress (pre-alpha)}
+\begin{itemize}
+\item Desktop engine that runs the real solar system in 3D: 459 moons, 62 dwarf planets, asteroids and comets, 28,331 belt objects, the solar wind, heliosphere and magnetospheres. Users drop black holes, neutron stars and planets into it and watch general relativity play out.
+\item Gravity: Einstein--Infeld--Hoffmann relativistic n-body dynamics with an adaptive IAS15 integrator, planets' gravity fields, post-Newtonian binaries with radiation reaction, and motion in exact Kerr spacetime. Earth stays within 0.41 km of NASA JPL after a simulated year (61 km without relativity).
+\item Every physics model ships with a validation test against theory or observation, 65+ passing: Mercury's relativistic precession 42.9807$''$ vs.\ 42.9805$''$ per century; the Hulse--Taylor pulsar's orbital decay within 1.1$\sigma$ of the measured rate; a GW150914 replay leaving 63.0 M$_\odot$ with spin 0.68 (LIGO: 62 $\pm$ 4, 0.67); Halley's Comet returning 17 minutes from JPL's 2061 time.
+\item Compact objects from first principles: the Chandrasekhar limit (1.456 M$_\odot$), a 2.048 M$_\odot$ maximum neutron-star mass from the SLy equation of state, and Hawking evaporation.
+\item GPU work in wgpu: ray-traced shadows of spinning black holes with Doppler-shifted accretion disks, and SPH fluid planets that tides tear apart, 8,144 particles at 32--55 frames a second on integrated graphics.
+\end{itemize}
+
+\cvgap
+
+\cvproject
+{Q-CONSENSUS}
+{Multi-Agent LLM Reasoning with Verifiable Decision Trails}
+{2026}
+{Solo. Python, FastAPI, llama.cpp, Qiskit Aer, Solidity, Geth, React, Docker}
+{github.com/Bishnu2430/Q-CONSENSUS}
+{}
+\begin{itemize}
+\item Five agents debate a question on a local LLM served by llama.cpp; a QAOA solver over quantum-kernel similarity between their answers picks the consensus, benchmarked against a classical baseline.
+\item Every event is SHA-256 hash-chained and anchored by a Solidity contract on a private Ethereum (Geth) chain, so any run can be replayed and verified after the fact.
+\item FastAPI service with a React front end; pytest suites cover the debate flow, the quantum optimiser, contract anchoring, reconciliation and API security.
+\end{itemize}
+
+\cvgap
+
+\cvproject
+{Misinformation Vaccine}
+{Fake-News Detection, URL to Verdict}
 {2025}
+{Solo. Python, PyTorch, Hugging Face Transformers, scikit-learn, FastAPI, PostgreSQL}
+{github.com/Bishnu2430/Misinformation-Vaccine}
+{}
 \begin{itemize}
-\item DistilBERT fine-tuned on 43,944 articles: 99.95\% accuracy, 0.9995 F1, against a 98.84\% TF-IDF baseline.
-\item URL-to-verdict pipeline with stored history; dataset-bias limits documented rather than hidden.
+\item Fine-tuned DistilBERT on 43,944 news articles: 99.95\% accuracy and 0.9995 F1, against a 98.84\% TF-IDF and logistic-regression baseline.
+\item End-to-end pipeline from a URL to a verdict: scraping, a FastAPI inference service and stored history in PostgreSQL.
+\item Documented the dataset-bias limits behind the near-ceiling scores rather than presenting them as real-world accuracy.
 \end{itemize}
 
-\vspace{4pt}
+\cvgap
 
-\cventry
-{Floodwatch -- IoT Flood Early-Warning}
-{Team, Suravi 2K26 (1st position). Python, scikit-learn, SHAP, Ollama, Arduino}
+\cvproject
+{Floodwatch}
+{IoT Flood Early Warning}
+{Feb 2026}
+{Team; 1st position, Model Fiesta, Suravi 2K26. Python, scikit-learn, SHAP, FastAPI, PostgreSQL, Ollama, React, Arduino}
+{github.com/Bishnu2430/Flood\_Detection\_System}
+{}
+\begin{itemize}
+\item An Arduino streams water-level, rain and float-switch readings over serial to a FastAPI service, which engineers 14 rolling features and runs a four-level risk model with SHAP attributions.
+\item At high risk, a local LLM (Ollama) explains the reading and the service switches on a hardware alert on the board; every reading is stored, even when the model or LLM fails.
+\item React dashboard with live readings, trends, SHAP explanations and streamed LLM output.
+\end{itemize}
+
+\cvgap
+
+\cvproject
+{QuantumLab}
+{Interactive Quantum Computing Course}
 {2026}
+{Team Creative Cartel, Internal SIH, GIET. Next.js, TypeScript, FastAPI, Qiskit Aer, PostgreSQL, Docker}
+{github.com/Bishnu2430/quantumLab}
+{}
 \begin{itemize}
-\item 14 engineered features from three sensors feed a four-level risk model with SHAP attributions.
-\item A local LLM explains high-risk readings and the system triggers a hardware alert.
+\item Seventeen lessons from a single qubit to Grover's search and BB84, each with worked derivations, an interactive visual, a circuit to run and Python to execute in a sandbox.
+\item Every circuit runs on Qiskit Aer, and CI checks every stated result against the simulator, so a lesson whose physics does not reproduce fails the build and does not ship.
 \end{itemize}
 
-\vspace{4pt}
+\cvgap
 
-\cventry
-{QuantumLab -- Interactive Quantum Computing Lab}
-{Team Creative Cartel, Internal SIH, GIET 2026. Next.js, FastAPI, Qiskit Aer}
-{2026}
+\cvproject
+{Soil-to-Shelf}
+{Blockchain Traceability for Ayurvedic Herbs}
+{2025}
+{Team, Smart India Hackathon (internal round), GIET. Hyperledger Fabric}
+{github.com/Bishnu2430/ayurvedic-blockchain}
+{}
 \begin{itemize}
-\item Circuits compile to Qiskit and run on Aer, so every probability and Bloch-sphere vector shown is simulated, never mocked. 15 routes, 9/9 correctness tests.
+\item Permissioned ledger that records geo-tagged collection events at harvest and follows each batch through labs and processors to a QR code on the product, so consumers and regulators can verify provenance.
 \end{itemize}
 
-\vspace{6pt}
+\cvgap
 
-\rowcolors{2}{mist}{white}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.1cm}Xr}
-\rowcolor{navy}
-\textcolor{white}{\textbf{Project}} & \textcolor{white}{\textbf{Summary}} & \textcolor{white}{\textbf{Year}} \\
-Soil-to-Shelf & Hyperledger Fabric traceability for Ayurvedic herbs, QR-based provenance (SIH, GIET) & 2025 \\
-CycleSense & IoT and LLM menstrual health platform (3rd, ReFlow, IIT Bhubaneswar) & 2025-26 \\
-ShelfSight & QR and OCR product scanning with a demand-prediction model & 2025 \\
-\end{tabularx}
+\cvproject
+{CycleSense}
+{IoT and LLM Menstrual Health Platform}
+{2025 -- 2026}
+{Team; 3rd place, ReFlow hackathon, IIT Bhubaneswar}
+{}
+{}
+\begin{itemize}
+\item Menstrual-health platform pairing IoT sensing with LLM-generated cycle insights.
+\end{itemize}
+
+\cvgap
+
+\cvproject
+{ShelfSight}
+{Smart Product Scanner}
+{2025}
+{Solo. Python, OpenCV, PaddleOCR, Tesseract, XGBoost, Flask, SQLite}
+{github.com/Bishnu2430/Smart\_Product\_Scanner}
+{}
+\begin{itemize}
+\item Generates and scans per-unit QR codes carrying product metadata, reads printed labels with OCR, and serves a demand-prediction model trained on stock-consumption data through an API.
+\end{itemize}

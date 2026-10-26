@@ -25,6 +25,7 @@
 \RequirePackage{enumitem}
 \RequirePackage{ragged2e}
 \RequirePackage{fancyhdr}
+\RequirePackage{needspace}
 \RequirePackage[hidelinks]{hyperref}
 
 \definecolor{navy}{HTML}{2342B8}
@@ -45,6 +46,9 @@
 \exhyphenpenalty=10000
 \tolerance=9999
 \emergencystretch=3em
+% Never leave one line of a paragraph or list item alone at a page break.
+\clubpenalty=10000
+\widowpenalty=10000
 
 \setlist[itemize]{leftmargin=12pt,itemsep=1pt,topsep=2pt,parsep=0pt,partopsep=0pt,label=\textcolor{navy}{\small$\blacktriangleright$}}
 
@@ -63,7 +67,8 @@
 [{\vspace{-7pt}\textcolor{navy}{\rule{2.2cm}{1.6pt}}\textcolor{hair}{\rule{\dimexpr\textwidth-2.2cm\relax}{1.6pt}}}]
 \titlespacing*{\section}{0pt}{11pt}{5pt}
 \renewcommand{\thesection}{}
-\newcommand{\cvsection}[1]{\section{#1}}
+% Keep a heading with at least the first lines of its section.
+\newcommand{\cvsection}[1]{\needspace{10\baselineskip}\section{#1}}
 
 %==================================================
 % Header with photo
@@ -100,13 +105,32 @@
 
 % #1 title, #2 organisation or stack, #3 dates
 \newcommand{\cventry}[3]{%
+\needspace{5\baselineskip}%
 {\rightskip=0pt\relax\noindent\textbf{\color{ink}#1}\hfill{\footnotesize\color{slate}#3}\par}%
 {\small\itshape\color{slate}#2}\par\vspace{1pt}%
 }
 
+% #1 name, #2 one-line description, #3 dates, #4 role and stack, #5 repository (no https://) or empty, #6 status or empty
+\newcommand{\cvproject}[6]{%
+\needspace{7\baselineskip}%
+{\rightskip=0pt\relax\noindent\textbf{\color{ink}#1} \textcolor{slate}{-- #2}\hfill{\footnotesize\color{slate}#3}\par}%
+{\small\itshape\color{slate}#4}\par
+\ifx\relax#5#6\relax\else
+{\footnotesize\ifx\relax#5\relax\else\href{https://#5}{#5}\fi
+\ifx\relax#5\relax\else\ifx\relax#6\relax\else\enspace\textcolor{hair}{|}\enspace\fi\fi
+\ifx\relax#6\relax\else{\bfseries\color{navy}#6}\fi}\par
+\fi
+\vspace{1pt}%
+}
+
+% Space between entries.
+\newcommand{\cvgap}{\vspace{6pt}}
+
 % tabularx cannot be wrapped in a custom environment (it scans for its own \end),
 % so the label/content tables are written inline with this column spec.
-\newcolumntype{L}{>{\raggedright\arraybackslash\bfseries\color{navy}}p{3.7cm}}
+% \leavevmode starts the paragraph before \color, so the label sits on the cell's first line.
+\newcolumntype{L}{>{\raggedright\arraybackslash\leavevmode\bfseries\color{navy}}p{3.7cm}}
+\renewcommand{\arraystretch}{1.3}
 
 \newcommand{\cvline}[2]{\textbf{\color{navy}#1}: #2\par\vspace{2pt}}
 \newcommand{\cvplain}[1]{#1\par\vspace{2pt}}

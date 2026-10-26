@@ -1,33 +1,50 @@
 \resumesection{Projects}
 
 \resumeproject
-{Q-CONSENSUS}
-{Multi-agent LLM reasoning with verifiable decision trails}
+{Nabz -- Lab Reports Explained}
+{https://github.com/Bishnu2430/Nabz}
+{Python, FastAPI, PostgreSQL, pgvector, React, TypeScript, Three.js, Docker}
 {2026}
-{Python, FastAPI, Qiskit Aer, llama.cpp, Solidity, Docker}
-{
+\begin{itemize}
+\item Full-stack app that reads a photo or PDF of a blood-test report and explains it in three languages on a 3D body map.
+\item Extraction pipeline (text layer, RapidOCR with deskew, layout-agnostic parser, LOINC mapping over 108 tests): 100\% field accuracy on 2,228 digital rows; 94.6\% recall at 100\% precision on simulated phone photos.
+\item Grounded LLM explanations (RAG over NLM MedlinePlus) pass a deterministic validator and an LLM judge, else fall back to a template; a 77-case red-team suite runs in CI.
+\item Trend engine (Theil--Sen, Mann--Kendall, RCV) confirms 88\% of planted drifts at five visits, at 1.0\% false alarms.
+\end{itemize}
+
+\entrygap
+
+\resumeproject
+{Worldline -- Relativistic Universe Sandbox}
+{https://github.com/Bishnu2430/Worldline}
+{Rust, wgpu, egui}
+{Oct 2026 -- present}
+\begin{itemize}
+\item Physics engine that simulates the real solar system from NASA JPL data (459 moons, 28,331 belt objects) with relativistic gravity and an adaptive IAS15 integrator; Earth stays within 0.41 km of JPL after a year.
+\item Every model ships with a validation test against theory or observation, 65+ passing: Mercury's precession 42.9807$''$ vs.\ 42.9805$''$ per century; a GW150914 replay leaves 63.0 M$_\odot$ (LIGO: 62 $\pm$ 4).
+\item GPU ray-traced black-hole shadows; SPH fluid planets torn apart by tides at 8,144 particles and 30+ FPS.
+\end{itemize}
+
+\entrygap
+
+\resumeproject
+{Q-CONSENSUS -- Multi-Agent LLM Reasoning}
+{https://github.com/Bishnu2430/Q-CONSENSUS}
+{Python, FastAPI, llama.cpp, Qiskit Aer, Solidity, Docker}
+{2026}
+\begin{itemize}
 \item Five agents debate on a local LLM; a QAOA solver over quantum-kernel similarity picks the consensus answer, benchmarked against a classical baseline.
-\item SHA-256 hash-chained events anchored on a private Ethereum chain, so any run can be replayed and verified.
-}
+\item SHA-256 hash-chained events, anchored on a private Ethereum chain, make every run replayable and verifiable.
+\end{itemize}
+
+\entrygap
 
 \resumeproject
-{Misinformation Vaccine}
-{Fake news detection, URL to verdict}
+{Misinformation Vaccine -- Fake-News Detection}
+{https://github.com/Bishnu2430/Misinformation-Vaccine}
+{PyTorch, Transformers, scikit-learn, FastAPI, PostgreSQL}
 {2025}
-{Python, PyTorch, Transformers, scikit-learn, FastAPI, PostgreSQL}
-{
-\item DistilBERT fine-tuned on 43,944 articles: 99.95\% accuracy and 0.9995 F1 against a 98.84\% TF-IDF baseline.
-\item Scraping, a FastAPI inference service and stored history; dataset-bias limits documented.
-}
-
-\resumeproject
-{Floodwatch}
-{IoT flood early-warning; 1st position, Model Fiesta, Suravi 2K26}
-{2026}
-{Python, scikit-learn, SHAP, FastAPI, Ollama, Arduino}
-{
-\item 14 engineered features from three sensors feed a four-level risk model with SHAP attributions.
-\item A local LLM explains high-risk readings and the system triggers a hardware alert.
-}
-
-\plainitem{\textbf{Also}: QuantumLab (Qiskit Aer lab); Soil-to-Shelf (Hyperledger Fabric traceability); CycleSense (IoT and LLM health); ShelfSight (OpenCV and OCR scanning).}
+\begin{itemize}
+\item Fine-tuned DistilBERT on 43,944 articles to 0.9995 F1, against a 98.84\%-accuracy TF-IDF baseline; documented the dataset bias behind the near-ceiling score.
+\item Served it as a URL-to-verdict FastAPI service with scraping and stored history.
+\end{itemize}
