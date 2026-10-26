@@ -1,106 +1,99 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{resume}[2026/09/26 ATS-optimised one-page resume]
+\ProvidesClass{resume}[2026/10/26 One-page resume]
 
 %==================================================
 % ATS notes
 %   - single column, no tables, no text boxes, no graphics, no header/footer
-%   - standard section names, plain-text contact lines
-%   - Type 1 fonts so every glyph extracts as real text
-%   - ASCII hyphens in date ranges (some parsers choke on en dashes)
+%   - standard section names, contact details as plain text
+%   - Type 1 fonts with T1 encoding, so every glyph extracts as real text
 %==================================================
 
-% extarticle gives a true 9pt base size; the text stays selectable, so ATS parsing is unaffected.
-\LoadClass[10pt,a4paper]{extarticle}
+\LoadClass[10pt,a4paper]{article}
 
-\RequirePackage[top=0.38in,bottom=0.32in,left=0.45in,right=0.45in]{geometry}
+\RequirePackage[top=0.42in,bottom=0.42in,left=0.5in,right=0.5in]{geometry}
 
 \RequirePackage[T1]{fontenc}
-\RequirePackage{lmodern}
 \RequirePackage[utf8]{inputenc}
+\RequirePackage{lmodern}
+\RequirePackage{charter}
+\RequirePackage[protrusion=true,expansion=true,tracking=true]{microtype}
+\RequirePackage{xcolor}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{titlesec}
 \RequirePackage{enumitem}
 \RequirePackage{ragged2e}
 
-\hypersetup{colorlinks=false,pdfborder={0 0 0}}
+\definecolor{ink}{HTML}{111111}
+\definecolor{accent}{HTML}{1F3A68}
+\definecolor{muted}{HTML}{4A4A4A}
+
+\hypersetup{colorlinks=false,pdfborder={0 0 0},pdfauthor={Bishnu Prasad Kar},pdftitle={Bishnu Prasad Kar - Resume}}
 \urlstyle{same}
 
 \pagestyle{empty}
+\color{ink}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \RaggedRight
 \raggedbottom
-\linespread{0.97}\selectfont
 
-% A plain ASCII hyphen as the bullet: extracts as "-" in every parser, unlike a bullet glyph.
-\setlist[itemize]{leftmargin=10pt,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt,label=-}
-
-% No hyphenation: keeps keywords whole for parsers that read line by line.
+% Keep keywords whole for parsers that read line by line.
 \hyphenpenalty=10000
 \exhyphenpenalty=10000
 \tolerance=9999
 \emergencystretch=3em
 
-%==================================================
-% Sections: plain bold capitals plus a rule
-%==================================================
-
-\titleformat{\section}{\normalsize\bfseries\uppercase}{}{0pt}{}
-\titlespacing*{\section}{0pt}{4pt}{1.5pt}
-\renewcommand{\thesection}{}
-
-\newcommand{\resumesection}[1]{%
-\section{#1}%
-\vspace{-5pt}\hrule\vspace{3pt}%
-}
+\setlist[itemize]{leftmargin=1.1em,labelsep=0.45em,itemsep=1.2pt,topsep=1.5pt,parsep=0pt,partopsep=0pt,label={\footnotesize$\bullet$}}
 
 %==================================================
-% Header: name, target title, then contact lines
+% Sections: capitals over a full-width rule (no letter-spacing: it splits words in extracted text)
 %==================================================
 
-\newcommand{\resumeheader}[4]{%
+\newcommand{\sectionlabel}[1]{\MakeUppercase{#1}}
+\titleformat{\section}
+  {\fontsize{10.8}{13}\selectfont\bfseries\color{accent}}{}{0pt}{\sectionlabel}
+  [\vspace{-7pt}\rule{\textwidth}{0.6pt}]
+\titlespacing*{\section}{0pt}{8pt}{4.5pt}
+
+\newcommand{\resumesection}[1]{\section*{#1}}
+
+%==================================================
+% Header: name, then two lines of contact details
+%==================================================
+
+\newcommand{\sep}{\enspace\textcolor{muted}{|}\enspace}
+
+% #1 name, #2 and #3 contact lines
+\newcommand{\resumeheader}[3]{%
 \begin{center}
-{\fontsize{17}{19}\selectfont\bfseries #1}
-
-\vspace{3pt}
-{\small #2}
-
-\vspace{3pt}
-{\footnotesize #3}
-
-\vspace{2pt}
-{\footnotesize #4}
+{\fontsize{22}{24}\selectfont\bfseries #1}\par
+\vspace{5pt}
+{\small #2}\par
+\vspace{1pt}
+{\small #3}\par
 \end{center}
-\vspace{2pt}%
+\vspace{-6pt}%
 }
 
 %==================================================
-% Entries: one text line, title first, date last
+% Entries
 %==================================================
 
-% One line per heading: role, then employer, then the date on the right.
-% \rightskip is reset inside the group so \hfill still works under \RaggedRight.
-\newcommand{\entryline}[3]{%
-{\rightskip=0pt\relax\noindent\textbf{#1}, #2\hfill #3\par}%
-}
-
-% #1 role, #2 employer, #3 dates, #4 bullet list
+% Two lines: what and when, then where.
+% \rightskip is reset inside each group so \hfill still works under \RaggedRight.
+% #1 title, #2 dates, #3 organisation, #4 location
 \newcommand{\resumeentry}[4]{%
-\entryline{#1}{#2}{#3}%
-#4%
-\vspace{3pt}%
+{\rightskip=0pt\relax\noindent\textbf{#1}\hfill #2\par}%
+{\rightskip=0pt\relax\noindent\textit{#3}\hfill\textit{#4}\par}%
 }
 
-% #1 name, #2 one-line description, #3 dates, #4 stack, #5 bullets
-\newcommand{\resumeproject}[5]{%
-{\rightskip=0pt\relax\noindent\textbf{#1} -- #2\hfill #3\par}%
-\textit{#4}\par
-\begin{itemize}#5\end{itemize}%
-\vspace{3pt}%
+% One line: name and stack, dates on the right.
+% #1 name, #2 link, #3 stack, #4 dates
+\newcommand{\resumeproject}[4]{%
+{\rightskip=0pt\relax\noindent\href{#2}{\textbf{#1}}\enspace\textcolor{muted}{|}\enspace\textit{#3}\hfill #4\par}%
 }
 
-\newcommand{\skillcategory}[2]{\textbf{#1}: #2\par\vspace{1.5pt}}
+% Space between entries in a section.
+\newcommand{\entrygap}{\vspace{4pt}}
 
-\newcommand{\publication}[2]{#1. \textit{#2}\par\vspace{1.5pt}}
-
-\newcommand{\plainitem}[1]{#1\par\vspace{1.5pt}}
+\newcommand{\skillline}[2]{\textbf{#1}: #2\par\vspace{1.5pt}}
