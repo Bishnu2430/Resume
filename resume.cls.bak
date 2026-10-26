@@ -1,0 +1,221 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{resume}[2026/07/01 Professional Resume Class]
+
+%==================================================
+% Base Class
+%==================================================
+
+\LoadClass[10pt,a4paper]{article}
+
+%==================================================
+% Page Layout
+%==================================================
+
+\RequirePackage[
+    top=0.38in,
+    bottom=0.38in,
+    left=0.45in,
+    right=0.45in
+]{geometry}
+
+%==================================================
+% Packages
+%==================================================
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{ragged2e}
+\RequirePackage{calc}
+
+%==================================================
+% Hyperlinks
+%==================================================
+
+\hypersetup{
+    colorlinks=false,
+    pdfborder={0 0 0}
+}
+
+\urlstyle{same}
+
+%==================================================
+% Page Style
+%==================================================
+
+\pagestyle{empty}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+
+\setlength{\tabcolsep}{0pt}
+
+\raggedbottom
+
+%==================================================
+% Itemize
+%==================================================
+
+\setlist[itemize]{
+    leftmargin=13pt,
+    itemsep=1pt,
+    topsep=2pt,
+    parsep=0pt,
+    partopsep=0pt
+}
+
+%==================================================
+% Colors
+%==================================================
+
+\definecolor{heading}{HTML}{111111}
+
+%==================================================
+% Section Formatting
+%==================================================
+
+\titleformat{\section}
+{\normalsize\bfseries}
+{}
+{0pt}
+{}
+
+\titlespacing*{\section}
+{0pt}
+{5pt}
+{2pt}
+
+%--------------------------------------------------
+
+\renewcommand{\thesection}{}
+
+%--------------------------------------------------
+
+\newcommand{\sectionline}{
+\vspace{-4pt}
+\hrule
+\vspace{3pt}
+}
+
+%--------------------------------------------------
+
+\newcommand{\resumesection}[1]{
+\section{#1}
+\sectionline
+}
+
+%==================================================
+% Utilities
+%==================================================
+
+\newcommand{\smallgap}{
+\vspace{3pt}
+}
+
+\newcommand{\medgap}{
+\vspace{6pt}
+}
+
+\newcommand{\biggap}{
+\vspace{10pt}
+}
+
+%==================================================
+% Resume Header
+%==================================================
+
+\newcommand{\resumeheader}[6]{
+\begin{center}
+
+{\fontsize{18}{20}\selectfont\bfseries #1}
+
+\vspace{2pt}
+
+{\small #2}
+
+\vspace{3pt}
+
+\footnotesize
+#3 \enspace$\vert$\enspace
+#4 \enspace$\vert$\enspace
+#5 \enspace$\vert$\enspace
+#6
+
+\end{center}
+
+\vspace{2pt}
+}
+
+%==================================================
+% Resume Entry
+%==================================================
+
+\newcommand{\resumeentry}[4]{
+
+\begin{tabularx}{\textwidth}{Xr}
+
+\textbf{#1} &
+\textit{#2}
+
+\end{tabularx}
+
+#3
+
+#4
+
+\vspace{3pt}
+
+}
+
+%==================================================
+% Resume Project
+%==================================================
+
+\newcommand{\resumeproject}[4]{
+
+\begin{tabularx}{\textwidth}{Xr}
+
+\textbf{#1} &
+\textit{#2}
+
+\end{tabularx}
+
+#3
+
+\begin{itemize}
+#4
+\end{itemize}
+
+\vspace{3pt}
+
+}
+
+%==================================================
+% Skills
+%==================================================
+
+\newcommand{\skillcategory}[2]{
+
+\textbf{#1}: #2
+
+\vspace{1pt}
+
+}
+
+%==================================================
+% Publications
+%==================================================
+
+\newcommand{\publication}[2]{
+
+\textbf{#1} -- #2
+
+\vspace{1pt}
+
+}

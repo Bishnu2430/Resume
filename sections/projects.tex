@@ -1,0 +1,33 @@
+\resumesection{Projects}
+
+\resumeproject
+{Q-CONSENSUS}
+{Multi-agent LLM reasoning with verifiable decision trails}
+{2026}
+{Python, FastAPI, Qiskit Aer, llama.cpp, Solidity, Docker}
+{
+\item Five agents debate on a local LLM; a QAOA solver over quantum-kernel similarity picks the consensus answer, benchmarked against a classical baseline.
+\item SHA-256 hash-chained events anchored on a private Ethereum chain, so any run can be replayed and verified.
+}
+
+\resumeproject
+{Misinformation Vaccine}
+{Fake news detection, URL to verdict}
+{2025}
+{Python, PyTorch, Transformers, scikit-learn, FastAPI, PostgreSQL}
+{
+\item DistilBERT fine-tuned on 43,944 articles: 99.95\% accuracy and 0.9995 F1 against a 98.84\% TF-IDF baseline.
+\item Scraping, a FastAPI inference service and stored history; dataset-bias limits documented.
+}
+
+\resumeproject
+{Floodwatch}
+{IoT flood early-warning; 1st position, Model Fiesta, Suravi 2K26}
+{2026}
+{Python, scikit-learn, SHAP, FastAPI, Ollama, Arduino}
+{
+\item 14 engineered features from three sensors feed a four-level risk model with SHAP attributions.
+\item A local LLM explains high-risk readings and the system triggers a hardware alert.
+}
+
+\plainitem{\textbf{Also}: QuantumLab (Qiskit Aer lab); Soil-to-Shelf (Hyperledger Fabric traceability); CycleSense (IoT and LLM health); ShelfSight (OpenCV and OCR scanning).}
